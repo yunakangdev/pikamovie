@@ -1,7 +1,7 @@
 import React from 'react';
+import styles from './movie_item.module.css';
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { AiOutlineStar, AiOutlineHeart } from "react-icons/ai";
-import styles from './movie_item.module.css';
 
 const MovieItem = ({ movie }) => {
 

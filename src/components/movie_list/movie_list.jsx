@@ -1,6 +1,6 @@
 import React from 'react';
-import MovieItem from '../movie_item/movie_item';
 import styles from './movie_list.module.css';
+import MovieItem from '../movie_item/movie_item';
 
 const MovieList = ({ movies }) => {
   return (

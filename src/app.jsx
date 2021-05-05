@@ -1,23 +1,28 @@
 import { useState, useEffect } from 'react';
+import SearchHeader from './components/search_header/search_header';
 import MovieList from './components/movie_list/movie_list';
-import './app.css';
 
-function App() {
+function App({ pictamovie }) {
   const [movies, setMovies] = useState([]);
 
+  const search = (query) => {
+    pictamovie
+      .search(query)
+      .then(movies => setMovies(movies));
+  }
+  
   useEffect(() => {
-  const requestOptions = {
-    method: 'GET',
-    redirect: 'follow'
-  };
-
-  fetch("http://www.omdbapi.com/?s=midnight&type=movie&apikey=b2a58f20", requestOptions)
-    .then(response => response.json())
-    .then(result => setMovies(result.Search))
-    .catch(error => console.log('error', error));
+    pictamovie
+      .initialData()
+      .then(movies => setMovies(movies));
   }, []);
 
-  return <MovieList movies={movies} />;
+  return (
+    <div>
+      <SearchHeader onSearch={search} />
+      <MovieList movies={movies} />
+    </div>
+  );
 }
 
 export default App;
