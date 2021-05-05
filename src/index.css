@@ -101,24 +101,3 @@ input {
   color: var(--color-black);
   line-height: 1;
 }
-
-.shine-effect span {
-  background: var(--color-navy);
-  background-image: linear-gradient(
-    -75deg,
-    transparent 0,
-    transparent 2%,
-    var(--color-blue) 2%,
-    var(--color-blue) 5%,
-    transparent 5%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  transition: 1.8s;
-}
-
-.shine-effect:hover span {
-  background-position: -120% 0%;
-}
