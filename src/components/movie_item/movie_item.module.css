@@ -1,0 +1,58 @@
+.movie {
+  display: flex;
+}
+
+.poster {
+  width: 105px;
+  height: 145px;
+  margin: 0.5rem 1.5rem;
+  cursor: pointer;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.description span {
+  display: block;
+}
+
+.title,
+.year,
+.others {
+  cursor: pointer;
+}
+
+.title {
+  font-size: 1.1em;
+  font-weight: 450;
+}
+
+.year {
+  padding-bottom: 1rem;
+}
+
+.others {
+  padding-bottom: 2rem;
+}
+
+.rating,
+.votes {
+  font-weight: 450;
+  padding-left: 0.2rem;
+  vertical-align: text-bottom;
+}
+
+.rating {
+  padding-right: 8rem;
+}
+
+.nominate i {
+  font-size: 1.3rem;
+}
+
+.nominate i:hover {
+  cursor: pointer;
+}
