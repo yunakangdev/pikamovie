@@ -1,0 +1,111 @@
+.outside {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--color-black);
+  opacity: 0.7;
+}
+
+.inside {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  width: 695px;
+  height: 505px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  background-color: var(--color-white);
+}
+
+.inside span {
+  display: block;
+}
+
+.inside span i {
+  font-size: 1.5rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  cursor: pointer;
+}
+
+.inside em {
+  font-weight: 450;
+}
+
+.left {
+  padding-right: 30px;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 450px;
+}
+
+.poster {
+  width: 300px;
+  height: 440px;
+}
+
+.title {
+  text-shadow: 0px 0px var(--color-navy);
+}
+
+.title em {
+  font-family: "Rubik", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  vertical-align: middle;
+}
+
+.title em:nth-child(1) {
+  color: var(--color-dark-grey);
+  font-weight: 350;
+  margin: 0 0.2rem;
+}
+
+.description em:nth-child(1) {
+  color: var(--color-dark-grey);
+  font-weight: 350;
+  margin: 0 0.2rem;
+}
+
+.description {
+  font-size: 15px;
+  font-weight: 450;
+}
+
+.actors span:last-child,
+.plot span:last-child {
+  font-size: 15px;
+}
+
+.description.hr {
+  width: 300px;
+  border-top: 1px solid var(--color-dark-grey);
+  border-bottom: 1px solid var(--color-dark-grey);
+  padding: 0.7em 0rem;
+}
+
+.imdb.hr {
+  width: 300px;
+  border-top: 1px solid var(--color-dark-grey);
+  padding-top: 1em;
+}
+
+.imdb {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating,
+.votes {
+  padding-left: 0.2rem;
+  vertical-align: text-bottom;
+}

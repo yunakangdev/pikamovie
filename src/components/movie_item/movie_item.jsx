@@ -3,14 +3,18 @@ import styles from './movie_item.module.css';
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { AiOutlineStar, AiOutlineHeart } from "react-icons/ai";
 
-const MovieItem = ({ movie }) => {
+const MovieItem = ({ movie, onMovieClick }) => {
 
   const { imdbID, Poster, Title, Year, Genre, Country, Runtime, imdbRating, imdbVotes} = movie;
 
+  const handleNoPoster = (e) => {
+    e.target.src=process.env.PUBLIC_URL + "./images/no-poster.png";
+  }
+
   return (
     <tr>
-      <td className={styles.movie}>
-        <img className={styles.poster} src={Poster} alt={Title} />
+      <td className={styles.movie} onClick={() => onMovieClick(imdbID)}>
+        <img className={styles.poster} src={Poster} onError={handleNoPoster} alt={Title} />
         <p className={styles.description}>
           <span className={styles.title}>{Title}</span>
           <span className={styles.year}>{Year}</span>

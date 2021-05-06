@@ -13,10 +13,16 @@ class Pictamovie {
     return result.Search;
   }
 
-  async search(query) {
-    const response = await fetch(`http://www.omdbapi.com/?apikey=${this.key}&s=${query}&type=movie`, this.getRequestOptions);
+  async searchByTitle(title) {
+    const response = await fetch(`http://www.omdbapi.com/?apikey=${this.key}&s=${title}&type=movie`, this.getRequestOptions);
     const result = await response.json();
     return result.Search;
+  }
+
+  async searchById(id) {
+    const response = await fetch(`http://www.omdbapi.com/?apikey=${this.key}&i=${id}&type=movie`, this.getRequestOptions);
+    const result = await response.json();
+    return result;
   }
 }
 
