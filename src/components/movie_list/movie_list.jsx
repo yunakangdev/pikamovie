@@ -1,8 +1,9 @@
 import React from 'react';
-import styles from './movie_list.module.css';
 import MovieItem from '../movie_item/movie_item';
+import styles from './movie_list.module.css';
 
-const MovieList = ({ movies, onMovieClick }) => {
+const MovieList = ({ movies, onMovieClick, onNominateClick }) => {
+// const MovieList = ({ movies, onMovieClick }) => {
   return (
     <table className={styles.movies}>
       <colgroup>
@@ -16,10 +17,12 @@ const MovieList = ({ movies, onMovieClick }) => {
         </tr>
       </thead>
       <tbody>
-        {movies.map(movie => <MovieItem key={movie.imdbID} 
-                                      movie={movie} 
-                                      onMovieClick={onMovieClick}
-                                      />)
+        {
+          movies.map(movie => <MovieItem key={movie.imdbID} 
+                                        movie={movie} 
+                                        onMovieClick={onMovieClick}
+                                        onNominateClick={onNominateClick}
+          />)
         }        
       </tbody>
     </table>

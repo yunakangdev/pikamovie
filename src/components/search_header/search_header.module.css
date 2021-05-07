@@ -16,7 +16,7 @@
 }
 
 .input {
-  flex-basis: 100%;
+  flex-basis: 50%;
   height: 2.8rem;
   padding-left: 1rem;
   border: 1px solid var(--color-dark-grey);

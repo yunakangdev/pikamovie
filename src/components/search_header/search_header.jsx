@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import styles from './search_header.module.css';
 import { AiOutlineSearch } from "react-icons/ai";
+import styles from './search_header.module.css';
 
 const SearchHeader = ({ onSearch }) => {
   const inputRef = useRef();
@@ -22,8 +22,8 @@ const SearchHeader = ({ onSearch }) => {
 
   return (
     <header className={styles.header}>
-      <a href="https://Pictamovie.netlify.app">
-        <div className={styles.logo}>Pictamovie</div>
+      <a href="https://Pikamovie.netlify.app">
+        <div className={styles.logo}>Pikamovie</div>
       </a>
       <div className={styles.search}>
         <input 

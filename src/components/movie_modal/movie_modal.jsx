@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './movie_modal.module.css';
 import { AiOutlineStar, AiOutlineHeart } from "react-icons/ai";
 import { IoIosClose } from "react-icons/io";
+import styles from './movie_modal.module.css';
 
-const MovieModal = ({ movie, onModalClose }) => {
-  const { imdbID, Poster, Title, Year, Genre, Country, Runtime, Actors, Plot, imdbRating, imdbVotes } = movie;
+const MovieModal = ({ selectedMovie, onModalClose }) => {
+  const { imdbID, Poster, Title, Year, Genre, Country, Runtime, Actors, Plot, imdbRating, imdbVotes } = selectedMovie;
   
   const handleNoPoster = (e) => {
     e.target.src=process.env.PUBLIC_URL + "./images/no-poster.png";
@@ -19,7 +19,7 @@ const MovieModal = ({ movie, onModalClose }) => {
         </div>
         <div className={styles.right}>
           <h2 className={styles.title}>{Title} <em>|</em> <em>{Year}</em></h2>
-          <p className={[styles.description, styles.hr].join(' ')} classId={styles.hr}>
+          <p className={[styles.description, styles.hr].join(' ')}>
             <span>{Genre}</span>
             <span>{Country} <em>|</em> {Runtime}</span>     
           </p>

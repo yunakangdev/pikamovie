@@ -1,0 +1,42 @@
+.nominees {
+  width: 35%;
+}
+
+.nominees th {
+  border-bottom: 1px solid var(--color-dark-grey);
+}
+
+.nominees td {
+  border-bottom: 1px solid var(--color-grey);
+}
+
+.nominees thead tr th {
+  border-top: 1px solid var(--color-dark-grey);
+  height: 50px;
+  font-weight: 450;
+  text-align: center;
+}
+
+.nominees tbody tr {
+  height: 25px;
+}
+
+.nominees tbody tr td {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.nominees tbody tr:last-child td {
+  border-bottom: 1px solid var(--color-dark-grey);
+}
+
+.nominees tr td {
+  display: flex;
+  justify-content: space-around;
+}
+
+.comment {
+  font-size: 16px;
+  text-align: center;
+  margin-top: 2rem;
+}

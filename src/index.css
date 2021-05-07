@@ -15,8 +15,8 @@
 }
 
 #root {
-  display: flex;
-  justify-content: center;
+  width: 1400px;
+  margin: auto;
 }
 
 html,
@@ -89,10 +89,6 @@ a {
 a:hover {
   text-decoration: none;
   color: var(--color-navy);
-}
-
-table {
-  border-collapse: collapse;
 }
 
 input {

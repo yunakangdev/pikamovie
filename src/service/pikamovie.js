@@ -1,4 +1,4 @@
-class Pictamovie {
+class Pikamovie {
   constructor(key) {
     this.key = key;
     this.getRequestOptions = {
@@ -26,4 +26,4 @@ class Pictamovie {
   }
 }
 
-export default Pictamovie;
+export default Pikamovie;

@@ -1,28 +1,67 @@
 import { useState, useEffect } from 'react';
 import SearchHeader from './components/search_header/search_header';
 import MovieList from './components/movie_list/movie_list';
+import NomineeList from './components/nominee_list/nominee_list';
 import MovieModal from './components/movie_modal/movie_modal';
 import Footer from './components/footer/footer';
+import styles from './app.module.css';
 
-const App = ({ pictamovie }) => {
+const App = ({ pikamovie }) => {
   const [movies, setMovies] = useState([]);
+  const [nominees, setNominees] = useState([]);
+  const [searchResult, setSearchResult] = useState('');
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalActive, setIsModalActive] = useState(false);
 
   useEffect(() => {
-    pictamovie
-      .initialData()
-      .then(movies => setMovies(movies));
-  }, []);
+    if (searchResult === '') {
+      pikamovie
+        .initialData()
+        .then(movies => setMovies(movies));
+    }
+  }, [searchResult]);
 
   const search = (title) => {
-    pictamovie
+    if (title) {
+      pikamovie
       .searchByTitle(title)
-      .then(movies => setMovies(movies));
+      .then(movies => {
+        if (movies) {
+          setSearchResult(`Results for \"${title}\"`);
+          setMovies(movies);
+        } else {
+          setSearchResult('Oops! We couldn\'t find the movie..try again?');
+        }
+      });
+    } else {
+      setSearchResult('');
+    }
+  }
+
+  const handleNominateClick = (id, isNominated) => {
+    if (isNominated) {
+      addNominee(id);
+    } else {
+      deleteNominee(id);
+    }
+  }
+
+  const addNominee = (id) => {
+    pikamovie
+      .searchById(id)
+      .then(movie => setNominees([...nominees, movie]));
+  }
+
+  const deleteNominee = (id) => {
+    pikamovie
+      .searchById(id)
+      .then(movie => {
+        setNominees(nominees.map((nominee) => nominee.imdbID !== movie.imdbID));
+      });
   }
 
   const openModal = (id) => {
-    pictamovie
+    pikamovie
       .searchById(id)
       .then(movie => setSelectedMovie(movie));
     setIsModalActive(true);
@@ -34,15 +73,37 @@ const App = ({ pictamovie }) => {
   }
 
   return (
-    <div>
+    <div className={styles.app}>
+      {/* Search header */}
       <SearchHeader onSearch={search} />
-      <MovieList movies={movies} onMovieClick={openModal} />
+      
+      {/* Search result comment */}
+      {
+        searchResult === '' &&
+        <span className={styles.comment}> {searchResult} </span>
+      }
+      {
+        searchResult &&
+        <span className={styles.comment}> {searchResult}</span>
+      }
+
+      {/* Movie & Nomination lists */}
+      <div className={styles.tables}>
+        {
+          <MovieList movies={movies} onMovieClick={openModal} onNominateClick={handleNominateClick} />
+        }
+        <NomineeList nominees={nominees} onDeleteClick={deleteNominee} />
+      </div>
+
+      {/* Modal */}
       {
         isModalActive && selectedMovie &&
-        <MovieModal movie={selectedMovie} 
-                    onModalClose={closeModal} 
+        <MovieModal selectedMovie={selectedMovie}
+                    onModalClose={closeModal}
         />
       }
+
+      {/* Footer */}
       <Footer />
     </div>
   );
