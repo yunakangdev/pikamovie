@@ -1,7 +1,7 @@
 ## 📑 PROJECT
 
 A webpage that can search OMDB for movies, and allow the user to save their favourite films  
-https://pictamovie.netlify.app/ (in progress)
+https://pikamovie.netlify.app/ (in progress)
 
 ---
 
