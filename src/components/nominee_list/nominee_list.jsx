@@ -25,6 +25,7 @@ const NomineeList = ({ nominees, onDeleteClick }) => {
         </tr>
       </thead>
       <tbody>
+        {/* Nomination list */}
         {
           nominees &&
           nominees.map(nominee => <nomineeItem key={nominee.imdbID} 
@@ -32,13 +33,14 @@ const NomineeList = ({ nominees, onDeleteClick }) => {
                                               onDeleteClick={onDeleteClick}
           />)
         }
+        {/* Nomination comment */}
         {
           numNominees === 0 &&
-          <h2 className={styles.comment}>Please choose nominees up to 5!</h2>
+          <span className={[styles.comment, styles.hr].join(' ')}>Please choose nominees up to 5!</span>
         }
         {
           numNominees >= 5 &&
-          <h2 className={styles.comment}>Thank you for choosing all 5 nominees!</h2>
+          <span className={styles.comment}>Thank you for choosing all 5 nominees!</span>
         }
       </tbody>
     </table>

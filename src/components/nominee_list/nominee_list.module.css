@@ -36,7 +36,13 @@
 }
 
 .comment {
-  font-size: 16px;
-  text-align: center;
-  margin-top: 2rem;
+  font-family: "PT Serif", serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 190px;
+}
+
+.hr {
+  border-bottom: 1px solid var(--color-dark-grey);
 }

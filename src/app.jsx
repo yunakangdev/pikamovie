@@ -39,6 +39,7 @@ const App = ({ pikamovie }) => {
   }
 
   const handleNominateClick = (id, isNominated) => {
+    console.log(isNominated);
     if (isNominated) {
       addNominee(id);
     } else {

@@ -7,7 +7,7 @@ https://pictamovie.netlify.app/ (in progress)
 
 ## ✏️ WIREFRAMING
 
-<img src="./src/utils/images/wireframing.PNG" width=500>
+<img src="./public/images/wireframing.png" width=500>
 
 ---
 
@@ -15,25 +15,25 @@ https://pictamovie.netlify.app/ (in progress)
 
 #### - MAIN
 
-<img src="./src/utils/images/main.PNG" width=1200>
+<img src="./public/images/main.png" width=1200>
 
 ---
 
 #### - SEARCH
 
-<img src="./src/utils/images/search.PNG" width=700>
+<img src="./public/images/search.png" width=700>
 
 ---
 
 #### - MODAL
 
-<img src="./src/utils/images/popup1.PNG" width=500>
+<img src="./public/images/modal-1.png" width=500>
 
 ---
 
 #### - MODAL (custom image for empty posters)
 
-<img src="./src/utils/images/popup2.PNG" width=500>   
+<img src="./public/images/modal-2.png" width=500>   
   
 ---
 
@@ -79,7 +79,11 @@ React, HTML, CSS, Heroku
 
 - [x] heroku error  
        => free deployment limit exceeded  
-       => deploy on netlify
+       => deploy on netlify  
+       yarn build  
+       netlify deploy  
+       netlify deploy --prod
+
 - [x] github push rejected after adding README file on Github  
        => git pull origin master
 
