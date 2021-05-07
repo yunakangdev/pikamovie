@@ -81,11 +81,11 @@ const App = ({ pikamovie }) => {
       {/* Search result comment */}
       {
         searchResult === '' &&
-        <span className={styles.comment}> {searchResult} </span>
+        <span className={styles.comment}>{searchResult}</span>
       }
       {
         searchResult &&
-        <span className={styles.comment}> {searchResult}</span>
+        <span className={styles.comment}>{searchResult}</span>
       }
 
       {/* Movie & Nomination lists */}

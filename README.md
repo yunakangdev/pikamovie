@@ -1,13 +1,14 @@
 ## 📑 PROJECT
 
-A webpage that can search OMDB for movies, and allow the user to save their favourite films  
+A webpage that can search OMDB for movies, and allow the user to save their favourite films
+
 https://pikamovie.netlify.app/ (in progress)
 
 ---
 
 ## ✏️ WIREFRAMING
 
-<img src="./public/images/wireframing.png" width=500>
+<!-- <img src="./public/images/wireframing.png" width=500> -->
 
 ---
 
