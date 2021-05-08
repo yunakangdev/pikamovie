@@ -101,3 +101,9 @@ React, HTML, CSS, Heroku
        => [`${styles, description} ${styles.hr}`]
 - [x] how to make tables responsive?  
        => flex: 1 1 70% / flex: 1 1 30% (display: flex, width: 100% for its parents & max-width: fixed value(px) for its grand parents)
+
+- [x] fetch doesn't work on Internet Explorer  
+       => use axios  
+       yarn add axios  
+       import axios from 'axios';  
+

@@ -1,28 +1,41 @@
+import axios from 'axios';
+
 class Pikamovie {
   constructor(key) {
-    this.key = key;
-    this.getRequestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    };
+    this.pikamovie = axios.create({
+      baseURL: `https://www.omdbapi.com/`,
+      params: { apikey: key },
+    });
   }
 
   async initialData() {
-    const response = await fetch(`https://www.omdbapi.com/?apikey=${this.key}&s=life&type=movie`, this.getRequestOptions);
-    const result = await response.json();
-    return result.Search;
+    const response = await this.pikamovie.get('', {
+      params: {
+        type: 'movie',
+        s: 'life',
+      }
+    });
+    return response.data.Search;
   }
 
   async searchByTitle(title) {
-    const response = await fetch(`https://www.omdbapi.com/?apikey=${this.key}&s=${title}&type=movie`, this.getRequestOptions);
-    const result = await response.json();
-    return result.Search;
+    const response = await this.pikamovie.get('', {
+      params: {
+        type: 'movie',
+        s: title,
+      }
+    });
+    return response.data.Search;
   }
 
   async searchById(id) {
-    const response = await fetch(`https://www.omdbapi.com/?apikey=${this.key}&i=${id}&type=movie`, this.getRequestOptions);
-    const result = await response.json();
-    return result;
+    const response = await this.pikamovie.get('', {
+      params: {
+        type: 'movie',
+        i: id,
+      }
+    })
+    return response.data;
   }
 }
 
