@@ -8,7 +8,7 @@ https://pikamovie.netlify.app/ (in progress)
 
 ## ✏️ WIREFRAMING
 
-<!-- <img src="./public/images/wireframing.png" width=500> -->
+<img src="./public/images/wireframing.png" alt="" width=500>
 
 ---
 
@@ -97,4 +97,7 @@ React, HTML, CSS, Heroku
       => saved it in .env file
 
 - [x] using multiple dynamic className  
-       => [styles.description, styles.hr].join(' ')]
+       => [styles.description, styles.hr].join(' ')]  
+       => [`${styles, description}, ${styles.hr}`]
+- [x] how to make tables responsive?  
+       => flex: 1 1 70% / flex: 1 1 30% (display: flex, width: 100% for its parents & max-width: fixed value(px) for its grand parents)

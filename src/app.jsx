@@ -40,7 +40,7 @@ const App = ({ pikamovie }) => {
 
   const handleNominateClick = (id, isNominated) => {
     console.log(isNominated);
-    if (isNominated) {
+    if (isNominated === 'true') {
       addNominee(id);
     } else {
       deleteNominee(id);
@@ -50,7 +50,11 @@ const App = ({ pikamovie }) => {
   const addNominee = (id) => {
     pikamovie
       .searchById(id)
-      .then(movie => setNominees([...nominees, movie]));
+      .then(movie => {
+        if (!(nominees.find(nominee => nominee.imdbID === movie.id))) {
+          setNominees([...(nominees || []), movie]);
+        }
+      });
   }
 
   const deleteNominee = (id) => {
@@ -90,10 +94,12 @@ const App = ({ pikamovie }) => {
 
       {/* Movie & Nomination lists */}
       <div className={styles.tables}>
-        {
+        <div className={styles.left}>
           <MovieList movies={movies} onMovieClick={openModal} onNominateClick={handleNominateClick} />
-        }
-        <NomineeList nominees={nominees} onDeleteClick={deleteNominee} />
+        </div>
+        <div className={styles.right}>
+          <NomineeList nominees={nominees} onDeleteClick={deleteNominee} />
+        </div>
       </div>
 
       {/* Modal */}

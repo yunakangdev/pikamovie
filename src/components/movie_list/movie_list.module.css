@@ -1,6 +1,5 @@
 .movies {
-  width: 100%;
-  padding-right: 5%;
+  width: 90%;
 }
 
 .movies colgroup:nth-child(1) {

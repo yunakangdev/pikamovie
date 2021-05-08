@@ -3,7 +3,6 @@ import MovieItem from '../movie_item/movie_item';
 import styles from './movie_list.module.css';
 
 const MovieList = ({ movies, onMovieClick, onNominateClick }) => {
-// const MovieList = ({ movies, onMovieClick }) => {
   return (
     <table className={styles.movies}>
       <colgroup>
