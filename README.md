@@ -106,4 +106,8 @@ React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux,
 - [x] react router => SPA + url  
        => yarn add react-router-dom
 
-- [ ] yarn add firebase
+- [ ] firebase  
+       => yarn add firebase
+
+- [ ] yarn add react-router-dom can't import useHistory  
+       => install yarn add react-router instead

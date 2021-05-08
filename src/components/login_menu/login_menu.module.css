@@ -10,10 +10,8 @@
 
 .menu {
   position: fixed;
-  top: 40%;
-  left: 46%;
-  /* overflow: hidden;
-  overflow-y: hidden; */
+  top: 35%;
+  left: 42%;
 }
 
 .google,
@@ -24,6 +22,39 @@
   font-family: "PT Serif", serif;
   color: var(--color-white);
   cursor: pointer;
+  text-align: center;
+}
+
+.github {
+  margin-bottom: 20px;
+}
+
+.dashboard,
+.logout {
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  margin: 10px;
+  font-family: "PT Serif", serif;
+  font-size: 20px;
+}
+
+.dashboard span,
+.dashboard span,
+span.line {
+  font-size: 19px;
+  padding: 0px 2px;
+  color: var(--color-white);
+}
+
+.dashboard a,
+.logout a {
+  color: var(--color-white);
+}
+
+.dashboard a:hover,
+.logout a:hover {
+  color: var(--color-white);
 }
 
 .google:hover,
@@ -39,4 +70,10 @@
   font-size: 24px;
   color: var(--color-white);
   cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .menu {
+    left: 38%;
+  }
 }

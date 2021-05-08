@@ -1,12 +1,13 @@
+import React from 'react';
 import { useState, useEffect, memo, useCallback } from 'react';
 import SearchHeader from './components/search_header/search_header';
 import MovieList from './components/movie_list/movie_list';
 import NomineeList from './components/nominee_list/nominee_list';
 import MovieModal from './components/movie_modal/movie_modal';
 import Footer from './components/footer/footer';
-import styles from './app.module.css';
 import Login from './components/login/login';
 import LoginMenu from './components/login_menu/login_menu';
+import styles from './app.module.css';
 
 const App = memo(({ pikamovie, authService }) => {
   const [movies, setMovies] = useState([]);
@@ -96,9 +97,16 @@ const App = memo(({ pikamovie, authService }) => {
       <div className={styles.header}>
         {/* Search header */}
         <SearchHeader onSearch={search} />
+
         {/* Login */}
-        <Login authService={authService} onLoginClick={openLogin} />
+        <Login onLoginClick={openLogin} />
       </div>
+
+      {/* Login full screen menu */}
+      {
+        isLoginActive &&
+        <LoginMenu authService={authService} onLoginClose={closeLogin} />
+      }
 
       {/* Search result comment */}
       {
@@ -126,12 +134,6 @@ const App = memo(({ pikamovie, authService }) => {
         <MovieModal selectedMovie={selectedMovie}
                     onModalClose={closeModal}
         />
-      }
-
-      {/* Login full screen menu */}
-      {
-        isLoginActive &&
-        <LoginMenu onLoginClose={closeLogin} />
       }
 
       {/* Footer */}
