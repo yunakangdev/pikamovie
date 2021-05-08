@@ -26,6 +26,8 @@ const MovieItem = memo(
       // console.log(isNominated);
     }
   
+    console.log(`movie item`);
+    
     return (
       <tr>
         <td className={styles.movie} onClick={() => onMovieClick(imdbID)}>

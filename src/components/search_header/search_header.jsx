@@ -2,8 +2,7 @@ import React, { memo, useRef } from 'react';
 import { AiOutlineSearch } from "react-icons/ai";
 import styles from './search_header.module.css';
 
-const SearchHeader = memo(
-  ({ onSearch }) => {
+const SearchHeader = memo(({ onSearch }) => {
     const inputRef = useRef();
   
     const handleSearch = () => {
@@ -20,7 +19,7 @@ const SearchHeader = memo(
     const onClick = () => {
       handleSearch();
     }
-  
+
     return (
       <header className={styles.header}>
         <a href="https://Pikamovie.netlify.app">

@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect, memo, useCallback } from 'react';
 import SearchHeader from './components/search_header/search_header';
 import MovieList from './components/movie_list/movie_list';
 import NomineeList from './components/nominee_list/nominee_list';
@@ -22,7 +22,7 @@ const App = memo(
       }
     }, [pikamovie, searchResult]);
   
-    const search = (title) => {
+    const search = useCallback((title) => {
       if (title) {
         pikamovie
         .searchByTitle(title)
@@ -37,16 +37,17 @@ const App = memo(
       } else {
         setSearchResult('');
       }
-    }
+    }, []);
   
-    const handleNominateClick = (id, isNominated) => {
-      console.log(isNominated);
-      if (isNominated === 'true') {
-        addNominee(id);
-      } else {
-        deleteNominee(id);
-      }
-    }
+    const handleNominateClick = useCallback(
+      (id, isNominated) => {
+        console.log(isNominated);
+        if (isNominated === 'true') {
+          addNominee(id);
+        } else {
+          deleteNominee(id);
+        }
+      }, []);
   
     const addNominee = (id) => {
       pikamovie
@@ -55,7 +56,8 @@ const App = memo(
           if (!(nominees.find(nominee => nominee.imdbID === movie.id))) {
             setNominees([...(nominees || []), movie]);
           }
-        });
+        }
+      );
     }
   
     const deleteNominee = (id) => {
@@ -66,12 +68,13 @@ const App = memo(
         });
     }
   
-    const openModal = (id) => {
+    const openModal = useCallback(
+      (id) => {
       pikamovie
         .searchById(id)
         .then(movie => setSelectedMovie(movie));
       setIsModalActive(true);
-    }
+    }, []);
   
     const closeModal = () => {
       setIsModalActive(false);
