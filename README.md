@@ -105,3 +105,5 @@ React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux,
 
 - [x] react router => SPA + url  
        => yarn add react-router-dom
+
+- [ ] yarn add firebase
