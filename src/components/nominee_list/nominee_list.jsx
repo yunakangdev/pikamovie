@@ -1,8 +1,8 @@
 import React, { useState, useEffect, memo } from 'react';
+import NomineeItem from '../nominee_item/nominee_item';
 import styles from './nominee_list.module.css';
 
-const NomineeList = memo(
-  ({ nominees, onDeleteClick }) => {
+const NomineeList = memo(({ nominees, onDeleteClick }) => {
     const [numNominees, setNumNominees] = useState(0);
   
     const getNumNominees = () => {
@@ -30,7 +30,7 @@ const NomineeList = memo(
             {/* Nomination list */}
             {
               nominees &&
-              nominees.map(nominee => <nomineeItem key={nominee.imdbID} 
+              nominees.map(nominee => <NomineeItem key={nominee.imdbID} 
                                                   nominee={nominee}
                                                   onDeleteClick={onDeleteClick}
               />)

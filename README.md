@@ -40,10 +40,15 @@ https://pikamovie.netlify.app/ (in progress)
 
 ## 🔮 FEATURE
 
-Search OMDB and display the results (movies only)
-Add a movie from the search results to our nomination list
-View the list of films already nominated
-Remove a nominee from the nomination list
+- Search OMDB and display the results (Axios)
+- Add a movie from the search results to our nomination list
+- View the list of films already nominated
+- Remove a nominee from the nomination list
+- Display a banner when the user has 5 nominations
+- Create Sign up / Sign in / Sign out pages (React Router)
+- Save nomination lists if the user leaves the page (Firebase)
+- Animations for loading, adding/deleting movies, notifications
+- Create shareable links (Netlify)
 
 ---
 
@@ -51,16 +56,7 @@ Remove a nominee from the nomination list
 
 #### STACK
 
-React, HTML, CSS, Heroku
-
-#### STEP
-
-- Search results come from OMDB's API
-- Each search result lists information of the movie (title, year of release and a button to nominate that film)
-- Updates to the search terms updates the result list
-- Movies in search results can be added and removed from the nomination list
-- If a search result has already been nominated, disable its nominate button
-- Display a banner when the user has 5 nominations
+React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux, Netlify
 
 ---
 
@@ -102,8 +98,10 @@ React, HTML, CSS, Heroku
 - [x] how to make tables responsive?  
        => flex: 1 1 70% / flex: 1 1 30% (display: flex, width: 100% for its parents & max-width: fixed value(px) for its grand parents)
 
-- [x] fetch doesn't work on Internet Explorer  
+- [x] fetch doesn't work on Internet Explorer (MDN Can I Use)  
        => use axios  
        yarn add axios  
-       import axios from 'axios';  
+       import axios from 'axios';
 
+- [x] react router => SPA + url  
+       => yarn add react-router-dom

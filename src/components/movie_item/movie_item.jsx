@@ -12,18 +12,13 @@ const MovieItem = memo(
     }
   
     const handleNominateClick = (id) => {
-      // console.log(isNominated);
-      // setIsNominated(isNominated ? !isNominated : isNominated);
-      // console.log(isNominated);
-  
-      // if (isNominated) {
-      //   onNominateClick(id, true);
-      // } else {
-      //   onNominateClick(id, false);
-      // }
-      // console.log(isNominated);
-      setIsNominated(!isNominated);
-      // console.log(isNominated);
+      const switchedIsNominated = !isNominated;
+      setIsNominated(switchedIsNominated);
+      if (switchedIsNominated === true) {
+        onNominateClick(id, true);
+      } else {
+        onNominateClick(id, false);
+      }
     }
   
     console.log(`movie item`);
@@ -40,7 +35,7 @@ const MovieItem = memo(
         <td className={styles.nominate}>
           <i onClick={() => handleNominateClick(imdbID)}>
             {
-              isNominated ? <FcLike /> : <FcLikePlaceholder />    
+              isNominated === true ? <FcLike /> : <FcLikePlaceholder />    
             }
           </i>
         </td>
