@@ -5,12 +5,15 @@ import NomineeList from './components/nominee_list/nominee_list';
 import MovieModal from './components/movie_modal/movie_modal';
 import Footer from './components/footer/footer';
 import styles from './app.module.css';
+import Login from './components/login/login';
+import LoginMenu from './components/login_menu/login_menu';
 
-const App = memo(({ pikamovie }) => {
+const App = memo(({ pikamovie, authService }) => {
   const [movies, setMovies] = useState([]);
   const [nominees, setNominees] = useState([]);
   const [searchResult, setSearchResult] = useState('');
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isLoginActive, setIsLoginActive] = useState(false);
   const [isModalActive, setIsModalActive] = useState(false);
 
   useEffect(() => {
@@ -80,11 +83,23 @@ const App = memo(({ pikamovie }) => {
     setSelectedMovie(null);
   }
 
+  const openLogin = () => {
+    setIsLoginActive(true);
+  }
+
+  const closeLogin = () => {
+    setIsLoginActive(false);
+  }
+
   return (
     <div className={styles.app}>
-      {/* Search header */}
-      <SearchHeader onSearch={search} />
-      
+      <div className={styles.header}>
+        {/* Search header */}
+        <SearchHeader onSearch={search} />
+        {/* Login */}
+        <Login authService={authService} onLoginClick={openLogin} />
+      </div>
+
       {/* Search result comment */}
       {
         searchResult === '' &&
@@ -111,6 +126,12 @@ const App = memo(({ pikamovie }) => {
         <MovieModal selectedMovie={selectedMovie}
                     onModalClose={closeModal}
         />
+      }
+
+      {/* Login full screen menu */}
+      {
+        isLoginActive &&
+        <LoginMenu onLoginClose={closeLogin} />
       }
 
       {/* Footer */}

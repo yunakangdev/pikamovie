@@ -1,0 +1,11 @@
+.login {
+  position: absolute;
+  right: 0;
+  padding: 3rem;
+  cursor: pointer;
+}
+
+.login:hover {
+  font-weight: 700;
+  color: var(--color-black);
+}
