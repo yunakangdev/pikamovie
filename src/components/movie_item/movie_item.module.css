@@ -10,6 +10,7 @@
 }
 
 .description {
+  width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,4 +57,11 @@
 
 .nominate i:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .title,
+  .year {
+    font-size: 14px;
+  }
 }

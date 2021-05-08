@@ -20,10 +20,12 @@
 
 .left {
   flex: 1 1 70%;
+  min-width: 450px;
   margin: 0 auto;
 }
 
 .right {
   flex: 1 1 30%;
+  min-width: 200px;
   margin: 0 auto;
 }

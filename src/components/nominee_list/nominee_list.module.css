@@ -47,3 +47,11 @@
 .hr {
   border-bottom: 1px solid var(--color-dark-grey);
 }
+
+@media screen and (max-width: 800px) {
+  .comment {
+    font-size: 12px;
+    width: 100px;
+    margin: auto;
+  }
+}
