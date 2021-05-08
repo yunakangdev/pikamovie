@@ -37,3 +37,9 @@
 .button:hover {
   color: var(--color-black);
 }
+
+@media screen and (max-width: 700px) {
+  .input {
+    flex-basis: 60%;
+  }
+}

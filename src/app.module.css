@@ -20,8 +20,10 @@
 
 .left {
   flex: 1 1 70%;
+  margin: 0 auto;
 }
 
 .right {
   flex: 1 1 30%;
+  margin: 0 auto;
 }

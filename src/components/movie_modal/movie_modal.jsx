@@ -19,7 +19,7 @@ const MovieModal = ({ selectedMovie, onModalClose }) => {
         </div>
         <div className={styles.right}>
           <h2 className={styles.title}>{Title} <em>|</em> <em>{Year}</em></h2>
-          <p className={[styles.description, styles.hr].join(' ')}>
+          <p className={[`${styles.description} ${styles.hr}`]}>
             <span>{Genre}</span>
             <span>{Country} <em>|</em> {Runtime}</span>     
           </p>
@@ -31,7 +31,7 @@ const MovieModal = ({ selectedMovie, onModalClose }) => {
             <span><em>{Plot !== "N/A" ? "Plot:" : ""} </em></span>
             <span>{Plot !== "N/A" ? Plot : ""}</span>
           </p>              
-          <p className={[styles.imdb, styles.hr].join(' ')}>
+          <p className={[`${styles.imdb} ${styles.hr}`]}>
             <i>
               <AiOutlineStar /><em className={styles.rating}>{imdbRating !== "N/A" ? imdbRating : "No rating"}</em> 
             </i>

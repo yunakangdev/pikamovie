@@ -98,6 +98,6 @@ React, HTML, CSS, Heroku
 
 - [x] using multiple dynamic className  
        => [styles.description, styles.hr].join(' ')]  
-       => [`${styles, description}, ${styles.hr}`]
+       => [`${styles, description} ${styles.hr}`]
 - [x] how to make tables responsive?  
        => flex: 1 1 70% / flex: 1 1 30% (display: flex, width: 100% for its parents & max-width: fixed value(px) for its grand parents)
