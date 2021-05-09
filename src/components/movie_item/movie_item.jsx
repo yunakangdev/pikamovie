@@ -1,23 +1,31 @@
-import React, { memo, useState } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import styles from './movie_item.module.css';
 
 const MovieItem = memo(
-  ({ movie, onMovieClick, onNominateClick }) => {
+  ({ movie, nominees, onMovieClick, onNominateClick }) => {
     const { imdbID, Poster, Title, Year} = movie;
     const [isNominated, setIsNominated] = useState(false);
+    const [numNominees, setNumNominees] = useState(0);
   
     const handleNoPoster = (e) => {
       e.target.src=process.env.PUBLIC_URL + "./images/no-poster.png";
     }
+
+    const getNumNominees = () => {
+      if (nominees) {
+        setNumNominees(nominees.length);
+      }
+    }
+  
+    useEffect(() => {
+      getNumNominees();
+    }, [nominees]);
   
     const handleNominateClick = (id) => {
-      const switchedIsNominated = !isNominated;
-      setIsNominated(switchedIsNominated);
-      if (switchedIsNominated === true) {
+      if (!isNominated && numNominees < 5) {
+        setIsNominated(true);
         onNominateClick(id, true);
-      } else {
-        onNominateClick(id, false);
       }
     }
     

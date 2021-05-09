@@ -41,8 +41,6 @@ const App = memo(({ pikamovie }) => {
   const handleNominateClick = useCallback((id, isNominated) => {    
     if (isNominated === true) {
       addNominee(id);
-    } else {
-      deleteNominee(id);
     }
   }, []);
 
@@ -50,22 +48,29 @@ const App = memo(({ pikamovie }) => {
     pikamovie
       .searchById(id)
       .then(movie => {
-        if (!(nominees.find(nominee => nominee.imdbID === movie.id)) && nominees.length < 5) {
+        if (!(nominees.find(nominee => nominee.imdbID === movie.id))) {
           setNominees(nominees => {
-            const updated = [...nominees, movie];
-            setNominees(updated);
+            if (!nominees || nominees.length < 5) {
+              const updated = [...nominees, movie];
+              setNominees(updated);
+            } else {
+              setNominees(nominees);
+            }
           })
         }
       }
     );
   }
 
-  const deleteNominee = (id) => {
-    pikamovie
-      .searchById(id)
-      .then(movie => {
-        setNominees(nominees.map((nominee) => nominee.imdbID !== movie.imdbID));
+  const deleteNominee = (deletedNominee) => {
+    if (nominees.find(nominee => deletedNominee)) {
+      setNominees(nominees => {
+        const updated = nominees.filter(nominee => {
+          return (nominee.imdbID !== deletedNominee.imdbID);
+        });
+        setNominees(updated);
       });
+    }
   }
 
   const openModal = useCallback((id) => {
@@ -82,6 +87,7 @@ const App = memo(({ pikamovie }) => {
 
   return (
     <div className={styles.app}>
+
       {/* Search */}
       <Search onSearch={search} />
 
@@ -98,7 +104,7 @@ const App = memo(({ pikamovie }) => {
       {/* Movie & Nomination list */}
       <div className={styles.tables}>
         <div className={styles.left}>
-          <MovieList movies={movies} onMovieClick={openModal} onNominateClick={handleNominateClick} />
+          <MovieList movies={movies} nominees={nominees} onMovieClick={openModal} onNominateClick={handleNominateClick} />
         </div>
         <div className={styles.right}>
           <NomineeList nominees={nominees} onDeleteClick={deleteNominee} />

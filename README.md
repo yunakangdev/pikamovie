@@ -134,3 +134,13 @@ React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux,
 
 - [ ] a bunch of errors on console  
        => if I fix it, the website doesn't seem to work
+- [x] in deleteNominee, map doesn't seem to work properly  
+       => use filter instead
+
+- [ ] deactivate the heart icon once the movie is deleted from the nomination list
+
+- [ ] implement fade animation when nominees added / deleted
+
+- [ ] add user information to dashboard
+
+- [ ] save nominated movies for the user and display it on dashboard

@@ -37,6 +37,7 @@ const NomineeList = memo(({ nominees, onDeleteClick }) => {
             }
           </tbody>
         </table>
+
         {/* Nomination list comment */}
         {
           numNominees === 0 &&

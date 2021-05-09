@@ -23,7 +23,7 @@
 }
 
 .nominees tbody tr td {
-  padding: 1.5rem;
+  padding: 2rem;
   text-align: center;
 }
 
@@ -38,6 +38,7 @@
 
 .comment {
   font-family: "PT Serif", serif;
+  font-weight: 600;
   width: 80%;
   margin: 0 auto;
   display: flex;
@@ -53,5 +54,9 @@
 
   .nominees thead tr th {
     font-size: 14px;
+  }
+
+  .nominees tbody tr td {
+    padding: 1.2rem;
   }
 }

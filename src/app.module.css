@@ -29,17 +29,6 @@
   min-width: 200px;
   margin: 0 auto;
 }
-/* 
-@media screen and (max-width: 800px) {
-  .left {
-    min-width: 300px;
-  }
-
-  .right {
-    margin-top: 4rem;
-    margin-bottom: 2rem;
-  }
-} */
 
 @media screen and (max-width: 400px) {
   .tables {

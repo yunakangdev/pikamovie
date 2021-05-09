@@ -2,6 +2,7 @@
   font-size: 14px;
   margin: auto;
   flex-basis: 80%;
+  text-align: start;
 }
 
 .delete {
