@@ -1,20 +1,16 @@
 import React from 'react';
 import { useState, useEffect, memo, useCallback } from 'react';
-import SearchHeader from './components/search_header/search_header';
+import Search from './components/search/search';
 import MovieList from './components/movie_list/movie_list';
 import NomineeList from './components/nominee_list/nominee_list';
 import MovieModal from './components/movie_modal/movie_modal';
-import Footer from './components/footer/footer';
-import Login from './components/login/login';
-import LoginMenu from './components/login_menu/login_menu';
 import styles from './app.module.css';
 
-const App = memo(({ pikamovie, authService }) => {
+const App = memo(({ pikamovie }) => {
   const [movies, setMovies] = useState([]);
   const [nominees, setNominees] = useState([]);
   const [searchResult, setSearchResult] = useState('');
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [isLoginActive, setIsLoginActive] = useState(false);
   const [isModalActive, setIsModalActive] = useState(false);
 
   useEffect(() => {
@@ -84,29 +80,10 @@ const App = memo(({ pikamovie, authService }) => {
     setSelectedMovie(null);
   }
 
-  const openLogin = () => {
-    setIsLoginActive(true);
-  }
-
-  const closeLogin = () => {
-    setIsLoginActive(false);
-  }
-
   return (
     <div className={styles.app}>
-      <div className={styles.header}>
-        {/* Search header */}
-        <SearchHeader onSearch={search} />
-
-        {/* Login */}
-        <Login onLoginClick={openLogin} />
-      </div>
-
-      {/* Login full screen menu */}
-      {
-        isLoginActive &&
-        <LoginMenu authService={authService} onLoginClose={closeLogin} />
-      }
+      {/* Search */}
+      <Search onSearch={search} />
 
       {/* Search result comment */}
       {
@@ -118,7 +95,7 @@ const App = memo(({ pikamovie, authService }) => {
         <span className={styles.comment}>{searchResult}</span>
       }
 
-      {/* Movie & Nomination lists */}
+      {/* Movie & Nomination list */}
       <div className={styles.tables}>
         <div className={styles.left}>
           <MovieList movies={movies} onMovieClick={openModal} onNominateClick={handleNominateClick} />
@@ -135,9 +112,6 @@ const App = memo(({ pikamovie, authService }) => {
                     onModalClose={closeModal}
         />
       }
-
-      {/* Footer */}
-      <Footer />
     </div>
     )
   }
