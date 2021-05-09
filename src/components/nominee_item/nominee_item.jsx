@@ -12,8 +12,7 @@ const NomineeItem = memo(({ nominee, onDeleteClick }) => {
         <i className={styles.delete} onClick={() => onDeleteClick(imdbID)}><IoIosClose /></i>
       </td>
     </tr>
-  )
-  }
+  )}
 );
 
 export default NomineeItem;

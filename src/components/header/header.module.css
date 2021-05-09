@@ -10,3 +10,19 @@
   font-size: 20px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 400px) {
+  .header {
+    font-size: 1.2rem;
+    padding: 2.5rem;
+  }
+
+  .search {
+    padding: 2rem 0 2rem 2rem;
+    margin-bottom: 0;
+  }
+
+  .button {
+    font-size: 16px;
+  }
+}

@@ -46,3 +46,13 @@
 .movies tbody tr:last-child td {
   border-bottom: 1px solid var(--color-dark-grey);
 }
+
+@media screen and (max-width: 400px) {
+  .movies {
+    width: 360px;
+  }
+
+  .movies thead tr th {
+    font-size: 14px;
+  }
+}

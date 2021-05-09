@@ -1,5 +1,7 @@
 .information {
   font-size: 14px;
+  margin: auto;
+  flex-basis: 80%;
 }
 
 .delete {

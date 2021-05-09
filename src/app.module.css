@@ -8,7 +8,7 @@
   padding: 0;
   font-family: "PT Serif", serif;
   font-size: 14px;
-  margin: -2.5rem 0 2.5rem 2.5rem;
+  margin: -2.5rem 0 4rem 4rem;
   height: 1rem;
 }
 
@@ -28,4 +28,25 @@
   flex: 1 1 30%;
   min-width: 200px;
   margin: 0 auto;
+}
+
+@media screen and (max-width: 800px) {
+  .tables {
+    flex-wrap: wrap;
+  }
+
+  .left {
+    min-width: 300px;
+  }
+
+  .right {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .comment {
+    margin: 0 0 1.6rem 2.5rem;
+  }
 }

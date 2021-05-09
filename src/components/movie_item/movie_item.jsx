@@ -20,8 +20,6 @@ const MovieItem = memo(
         onNominateClick(id, false);
       }
     }
-  
-    console.log(`movie item`);
     
     return (
       <tr>

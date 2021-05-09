@@ -38,29 +38,27 @@ const App = memo(({ pikamovie }) => {
     }
   }, []);
 
-  const handleNominateClick = useCallback((id, isNominated) => {
-      console.log(isNominated === true);
-      if (isNominated === true) {
-        addNominee(id);
-      } else {
-        deleteNominee(id);
-      }
-    }, []);
+  const handleNominateClick = useCallback((id, isNominated) => {    
+    if (isNominated === true) {
+      addNominee(id);
+    } else {
+      deleteNominee(id);
+    }
+  }, []);
 
   const addNominee = (id) => {
-    console.log('add');
     pikamovie
       .searchById(id)
       .then(movie => {
         if (!(nominees.find(nominee => nominee.imdbID === movie.id))) {
-          setNominees([...nominees, movie]);
+          const updated = ([...nominees, movie]);
+          setNominees(updated);
         }
       }
     );
   }
 
   const deleteNominee = (id) => {
-    console.log('delete');
     pikamovie
       .searchById(id)
       .then(movie => {

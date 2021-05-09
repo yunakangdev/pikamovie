@@ -141,15 +141,74 @@
     font-size: 12px;
   }
 
-  .hr {
+  .description.hr {
     width: 250px;
   }
 
-  .description.hr {
+  .imdb.hr {
     padding: 0.7em 0rem;
   }
 
   .imdb {
     font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .inside {
+    width: 240px;
+    height: 540px;
+    padding: 5px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+  }
+
+  .left {
+    padding-right: 0px;
+  }
+
+  .poster {
+    width: 100px;
+    height: 140px;
+    margin-bottom: 0rem;
+  }
+
+  .right {
+    width: 200px;
+    height: 320px;
+  }
+
+  .title {
+    padding: 0;
+    margin: 0 0 0.3rem 0;
+  }
+
+  .description {
+    width: 200px;
+    padding: 0.7em 0em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .actors {
+    font-size: 12px;
+    padding-top: 0.3rem;
+  }
+
+  .plot {
+    font-size: 12px;
+    padding-bottom: 0.3rem;
+  }
+
+  .description.hr,
+  .imdb.hr {
+    font-size: 12px;
+    width: 200px;
+  }
+
+  .description.hr {
+    padding-top: 0.7rem;
   }
 }

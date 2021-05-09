@@ -54,4 +54,8 @@
   .comment {
     font-size: 12px;
   }
+
+  .nominees thead tr th {
+    font-size: 14px;
+  }
 }

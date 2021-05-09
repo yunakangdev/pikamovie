@@ -37,7 +37,7 @@ const NomineeList = memo(({ nominees, onDeleteClick }) => {
             }
           </tbody>
         </table>
-        {/* Nomination comment */}
+        {/* Nomination list comment */}
         {
           numNominees === 0 &&
           <span className={[styles.comment, styles.hr].join(' ')}>Please choose nominees up to 5!</span>
