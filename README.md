@@ -8,7 +8,9 @@ https://pikamovie.netlify.app/ (in progress)
 
 ## ✏️ WIREFRAMING
 
-<img src="./public/images/wireframing.png" alt="" width=500>
+<p align="center">
+  <img src="./public/images/wireframing.png" alt="" width=500>
+</p>
 
 ---
 
@@ -16,25 +18,33 @@ https://pikamovie.netlify.app/ (in progress)
 
 #### - MAIN
 
-<img src="./public/images/main.png" width=1200>
+<p align="center">
+  <img src="./public/images/main.png" width=1200>
+</p>
 
 ---
 
 #### - SEARCH
 
-<img src="./public/images/search.png" width=700>
+<p align="center">
+  <img src="./public/images/search.png" width=700>
+</p>
 
 ---
 
 #### - MODAL
 
-<img src="./public/images/modal-1.png" width=500>
+<p align="center">
+  <img src="./public/images/modal-1.png" width=500>
+</p>
 
 ---
 
 #### - MODAL (custom image for empty posters)
 
-<img src="./public/images/modal-2.png" width=500>   
+<p align="center">
+  <img src="./public/images/modal-2.png" width=500>   
+</p>
   
 ---
 
