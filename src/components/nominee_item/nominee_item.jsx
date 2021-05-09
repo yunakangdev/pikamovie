@@ -8,7 +8,7 @@ const NomineeItem = memo(({ nominee, onDeleteClick }) => {
   return (
     <tr>
       <td className={styles.nominee}>
-        <p className={styles.information}>{Title} | {Year}</p>
+        <p className={styles.information}>{Title} {Year}</p>
         <i className={styles.delete} onClick={() => onDeleteClick(imdbID)}><IoIosClose /></i>
       </td>
     </tr>

@@ -50,9 +50,11 @@ const App = memo(({ pikamovie }) => {
     pikamovie
       .searchById(id)
       .then(movie => {
-        if (!(nominees.find(nominee => nominee.imdbID === movie.id))) {
-          const updated = ([...nominees, movie]);
-          setNominees(updated);
+        if (!(nominees.find(nominee => nominee.imdbID === movie.id)) && nominees.length < 5) {
+          setNominees(nominees => {
+            const updated = [...nominees, movie];
+            setNominees(updated);
+          })
         }
       }
     );

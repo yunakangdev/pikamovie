@@ -116,8 +116,21 @@ React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux,
 - [x] react router => SPA + url  
        => yarn add react-router-dom
 
-- [ ] firebase  
-       => yarn add firebase
-
-- [ ] yarn add react-router-dom can't import useHistory  
+- [x] yarn add react-router-dom can't import useHistory  
        => install yarn add react-router instead
+
+- [ ] mapping an array can affect web performance  
+       => change the nominees array to the object type and use Object.keys(nominees) to map the object using its key
+
+- [x] setNominees doensn't work  
+       => wrap setState callback in an arrow function  
+       const updated = ([...nominees, movie]);  
+       setNominees(updated);
+
+      setNominees(nominees => {
+        const updated = ([...nominees, movie]);
+        setNominees(updated);
+      })
+
+- [ ] a bunch of errors on console  
+       => if I fix it, the website doesn't seem to work

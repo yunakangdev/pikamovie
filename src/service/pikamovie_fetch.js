@@ -1,3 +1,5 @@
+// used fetch for practice
+
 class PikamovieFetch {
   constructor(key) {
     this.key = key;
