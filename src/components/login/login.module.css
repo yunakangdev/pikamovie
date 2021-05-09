@@ -11,7 +11,7 @@
 .menu {
   position: fixed;
   top: 35%;
-  left: 42%;
+  left: 45%;
 }
 
 .google,
@@ -74,6 +74,12 @@ span.line {
 
 @media screen and (max-width: 800px) {
   .menu {
-    left: 38%;
+    left: 35%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .menu {
+    left: 20%;
   }
 }

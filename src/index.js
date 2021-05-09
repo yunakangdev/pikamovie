@@ -17,7 +17,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Header authService={authService} />
       <Route exact path="/"><App pikamovie={pikamovie} authService={authService} /></Route>
-      <Route path="/dashboard"><Dashboard /></Route>
+      <Route path="/dashboard"><Dashboard authService={authService} /></Route>
       <Footer />
     </BrowserRouter>
   </React.StrictMode>,

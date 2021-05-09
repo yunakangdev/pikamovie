@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import styles from './login.module.css';
 
 const Login = ({ authService, onLoginClose }) => {
-  let history = useHistory();
-  let goToDashboard = userId => {
+  const history = useHistory();
+  const goToDashboard = userId => {
     history.push({
       pathname: '/dashboard',
       state: { id: userId },
