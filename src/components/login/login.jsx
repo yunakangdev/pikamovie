@@ -4,10 +4,10 @@ import { Link, useHistory } from 'react-router-dom';
 import styles from './login.module.css';
 
 const Login = ({ authService, onLoginClose, nomineesRepository }) => {
-  const historyState = useHistory().state();
+  const history = useHistory();
+  const historyState = history?.location?.state;
   const [userId, setUserId] = useState(historyState && historyState.id);
 
-  const history = useHistory();
   const goToDashboard = userId => {
     history.push({
       pathname: '/dashboard',
