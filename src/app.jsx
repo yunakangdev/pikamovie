@@ -6,7 +6,7 @@ import NomineeList from './components/nominee_list/nominee_list';
 import MovieModal from './components/movie_modal/movie_modal';
 import styles from './app.module.css';
 
-const App = memo(({ pikamovie }) => {
+const App = memo(({ pikamovie, nomineesRepository }) => {
   const [movies, setMovies] = useState([]);
   const [nominees, setNominees] = useState([]);
   const [searchResult, setSearchResult] = useState('');
@@ -53,6 +53,10 @@ const App = memo(({ pikamovie }) => {
             if (!nominees || nominees.length < 5) {
               const updated = [...nominees, movie];
               setNominees(updated);
+
+              // add the movie to the firebase database
+              nomineesRepository.saveNominee(movie.imdbID, movie);
+
             } else {
               setNominees(nominees);
             }
@@ -62,6 +66,7 @@ const App = memo(({ pikamovie }) => {
         });
       }
     );
+    // nomineesRepository.saveNominee(userId, movie);
   }
 
   const deleteNominee = (deletedNominee) => {

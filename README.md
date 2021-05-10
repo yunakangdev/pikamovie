@@ -144,3 +144,8 @@ React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux,
 - [ ] add user information to dashboard
 
 - [ ] save nominated movies for the user and display it on dashboard
+
+- [ ] useHistory.state() is not a functino error  
+      https://github.com/iamshaunjp/React-Redux-Firebase-App/issues/13  
+       => npm install --save react-redux-firebase  
+       => npm install --save redux-firestore

@@ -34,7 +34,7 @@ class Pikamovie {
         type: 'movie',
         i: id,
       }
-    })
+    });
     return response.data;
   }
 }

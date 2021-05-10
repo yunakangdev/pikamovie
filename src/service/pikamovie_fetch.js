@@ -1,4 +1,4 @@
-// used fetch for practice
+// fetch for practice
 
 class PikamovieFetch {
   constructor(key) {
