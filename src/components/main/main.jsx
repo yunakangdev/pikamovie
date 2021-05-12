@@ -1,48 +1,21 @@
 import React from 'react';
 import { useState, useEffect, memo, useCallback } from 'react';
-<<<<<<< HEAD:src/components/main/main.jsx
 import { useHistory } from 'react-router-dom';
 import Search from '../search/search';
 import MovieList from '../movie_list/movie_list';
 import NomineeList from '../nominee_list/nominee_list';
 import MovieModal from '../movie_modal/movie_modal';
-=======
-import { Link, useHistory } from 'react-router-dom';
-import Search from './components/search/search';
-import MovieList from './components/movie_list/movie_list';
-import NomineeList from './components/nominee_list/nominee_list';
-import MovieModal from './components/movie_modal/movie_modal';
->>>>>>> 77855722058c54741146c24f3641ff53fc3d11d1:src/main.jsx
 import styles from './main.module.css';
-import { IoIosClose } from "react-icons/io";
 
-<<<<<<< HEAD:src/components/main/main.jsx
 const Main = memo(({ pikamovie, nomineesRepository }) => {
   const history = useHistory();
   const historyState = history?.location?.state;
   const [userId, setUserId] = useState(historyState && historyState.id);
-=======
-const Main = memo(({ authService, pikamovie, nomineesRepository }) => {
->>>>>>> 77855722058c54741146c24f3641ff53fc3d11d1:src/main.jsx
   const [movies, setMovies] = useState([]);
   const [nominees, setNominees] = useState([]);
   const [searchResult, setSearchResult] = useState('');
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalActive, setIsModalActive] = useState(false);
-  const [isLoginActive, setIsLoginActive] = useState(false);
-  const history = useHistory();
-  const historyState = history?.location?.state;
-  const [userId, setUserId] = useState(historyState && historyState.id);
-
-  useEffect(() => {
-    authService.onAuthChange(user => {
-      if (user) {
-        setUserId(user.uid);
-      } else {
-        history.push('/');
-      }
-    });
-  });
 
   useEffect(() => {
     if (searchResult === '') {
@@ -89,11 +62,7 @@ const Main = memo(({ authService, pikamovie, nomineesRepository }) => {
                 nomineesRepository.saveNominee(userId, movie.imdbID);
               }
               // add the movie to the firebase database
-<<<<<<< HEAD:src/components/main/main.jsx
-=======
-              nomineesRepository.saveNominee(userId, movie.imdbID);
 
->>>>>>> 77855722058c54741146c24f3641ff53fc3d11d1:src/main.jsx
             } else {
               setNominees(nominees);
             }
@@ -128,78 +97,8 @@ const Main = memo(({ authService, pikamovie, nomineesRepository }) => {
     setSelectedMovie(null);
   }
 
-  const openLoginMenu = () => {
-    setIsLoginActive(true);
-  }
-
-  const closeLoginMenu = () => {
-    setIsLoginActive(false);
-  }
-
-  const goToDashboard = (userId) => {
-    if (userId) {
-      history.push({
-        pathname: '/dashboard',
-        state: { id: userId },
-      });
-      closeLoginMenu();
-    }
-  };
-
-  const goToMain = (userId) => {
-    history.push({
-      pathname: '/',
-      state: { id: userId }
-    });
-    closeLoginMenu();
-  }
-
-  const onLogin = (event) => {
-    authService //
-      .login(event.currentTarget.textContent)
-      .then(data => {
-        // setUserId(data.user.uid);
-        closeLoginMenu();
-        goToDashboard(data.user.uid);
-      });
-  }
-
-  const onLogout = (event) => {
-    authService.logout();
-    closeLoginMenu();
-    goToMain(userId);
-  }
-
   return (
     <div className={styles.main}>
-<<<<<<< HEAD:src/components/main/main.jsx
-=======
-      {/* Header */}
-      <header className={styles.header}>
-        {/* Logo */}
-        <div className={styles.logo}><Link to="/">Pikamovie</Link></div>
-
-        {/* Login button */}
-        <div className={styles.button} onClick={openLoginMenu}>Login</div>
-
-        {/* Login full screen menu */}
-        {
-          isLoginActive &&
-          <div className={styles.login}>
-            <ul className={styles.menu}>
-              <li className={styles.google} onClick={onLogin}>Google</li>
-              <li className={styles.github} onClick={onLogin}>Github</li>
-              <span className={styles.dashboard} onClick={goToDashboard}>Account</span>
-              <span className={styles.line}>|</span>
-              <span className={styles.logout} onClick={onLogout}><Link to="/">Log out</Link></span>
-              {/* <span className={styles.logout} onClick={onLogout}>Log out</span> */}
-            </ul>
-            <i className={styles.close} onClick={closeLoginMenu}><IoIosClose /></i>
-          </div>
-        }
-      </header>
-
->>>>>>> 77855722058c54741146c24f3641ff53fc3d11d1:src/main.jsx
       {/* Search */}
       <Search onSearch={search} />
 
