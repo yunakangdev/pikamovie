@@ -134,6 +134,7 @@ React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux,
 
 - [ ] a bunch of errors on console  
        => if I fix it, the website doesn't seem to work
+
 - [x] in deleteNominee, map doesn't seem to work properly  
        => use filter instead
 
@@ -141,7 +142,7 @@ React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux,
 
 - [ ] implement fade animation when nominees added / deleted
 
-- [ ] add user information to dashboard
+- [x] add user information to dashboard using firebase
 
 - [ ] save nominated movies for the user and display it on dashboard
 
@@ -149,3 +150,6 @@ React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux,
        https://github.com/iamshaunjp/React-Redux-Firebase-App/issues/13  
        => npm install --save react-redux-firebase  
        => npm install --save redux-firestore
+
+- [x] the website looks bigger on Netlify  
+       => deploy on Heroku
