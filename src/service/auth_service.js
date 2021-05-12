@@ -16,6 +16,11 @@ class AuthService {
       onUserChanged(user);
     });
   }
+
+  getUser() {
+    const user = firebase.auth().currentUser;
+    console.log(user);
+  }
 }
 
 export default AuthService;

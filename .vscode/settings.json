@@ -1,6 +1,20 @@
 {
   "explorer.compactFolders": false,
   "workbench.colorCustomizations": {
-  
-  }
+    "titleBar.activeBackground": "#3f708d",
+    "titleBar.inactiveBackground": "#3f708d99",
+    "activityBar.activeBackground": "#4f8cb0",
+    "activityBar.activeBorder": "#843b69",
+    "activityBar.background": "#4f8cb0",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#843b69",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "statusBar.background": "#3f708d",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#4f8cb0",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#3F708D"
 }

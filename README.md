@@ -9,7 +9,7 @@ https://pikamovie.netlify.app/ (in progress)
 ## ✏️ WIREFRAMING
 
 <p align="center">
-  <img src="./public/images/wireframing.png" alt="" width=500>
+  <img src="./public/images/wireframing.png"alt="" width=500>
 </p>
 
 ---
@@ -145,7 +145,7 @@ React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux,
 
 - [ ] save nominated movies for the user and display it on dashboard
 
-- [ ] useHistory.state() is not a functino error  
-      https://github.com/iamshaunjp/React-Redux-Firebase-App/issues/13  
+- [x] useHistory.state() is not a function error  
+       https://github.com/iamshaunjp/React-Redux-Firebase-App/issues/13  
        => npm install --save react-redux-firebase  
        => npm install --save redux-firestore

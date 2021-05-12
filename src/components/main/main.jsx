@@ -1,12 +1,16 @@
 import React from 'react';
 import { useState, useEffect, memo, useCallback } from 'react';
-import Search from './components/search/search';
-import MovieList from './components/movie_list/movie_list';
-import NomineeList from './components/nominee_list/nominee_list';
-import MovieModal from './components/movie_modal/movie_modal';
+import { useHistory } from 'react-router-dom';
+import Search from '../search/search';
+import MovieList from '../movie_list/movie_list';
+import NomineeList from '../nominee_list/nominee_list';
+import MovieModal from '../movie_modal/movie_modal';
 import styles from './main.module.css';
 
 const Main = memo(({ pikamovie, nomineesRepository }) => {
+  const history = useHistory();
+  const historyState = history?.location?.state;
+  const [userId, setUserId] = useState(historyState && historyState.id);
   const [movies, setMovies] = useState([]);
   const [nominees, setNominees] = useState([]);
   const [searchResult, setSearchResult] = useState('');
@@ -54,9 +58,10 @@ const Main = memo(({ pikamovie, nomineesRepository }) => {
               const updated = [...nominees, movie];
               setNominees(updated);
 
+              if (userId) {
+                nomineesRepository.saveNominee(userId, movie.imdbID);
+              }
               // add the movie to the firebase database
-              nomineesRepository.saveNominee(movie.imdbID, movie);
-
             } else {
               setNominees(nominees);
             }
@@ -93,7 +98,6 @@ const Main = memo(({ pikamovie, nomineesRepository }) => {
 
   return (
     <div className={styles.main}>
-
       {/* Search */}
       <Search onSearch={search} />
 
