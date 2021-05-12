@@ -1,7 +1,8 @@
 {
-  "name": "oscar-with-ellie",
+  "name": "pikamovie",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jeankangdev.github.io/my-app",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -9,6 +10,7 @@
     "axios": "^0.21.1",
     "firebase": "^8.5.0",
     "firebase-admin": "^9.7.0",
+    "gh-pages": "^3.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
@@ -23,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b docs -d build"
   },
   "eslintConfig": {
     "extends": [

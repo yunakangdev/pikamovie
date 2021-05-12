@@ -9,7 +9,7 @@ https://pikamovie.netlify.app/ (in progress)
 ## ✏️ WIREFRAMING
 
 <p align="center">
-  <img src="./public/images/wireframing.png"alt="" width=500>
+  <img src="./public/images/wireframing.png" alt="" width=500>
 </p>
 
 ---
@@ -152,4 +152,13 @@ React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux,
        => npm install --save redux-firestore
 
 - [x] the website looks bigger on Netlify  
-       => deploy on Heroku
+       => deploy on Heroku  
+       https://create-react-app.dev/docs/deployment/  
+       - "homepage": "https://jeankangdev.github.io/my-app"  
+       - yarn add gh-pages  
+       - "scripts": {
+      "predeploy": "npm run build",
+      "deploy": "gh-pages -d build",
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      }
