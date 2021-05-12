@@ -21,6 +21,15 @@
   opacity: 0.95;
 }
 
+<<<<<<< HEAD
+=======
+.menu {
+  position: fixed;
+  top: 35%;
+  left: 43%;
+}
+
+>>>>>>> 77855722058c54741146c24f3641ff53fc3d11d1
 .google,
 .github {
   font-size: 24px;

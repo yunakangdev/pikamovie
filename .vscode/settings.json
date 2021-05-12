@@ -1,6 +1,7 @@
 {
   "explorer.compactFolders": false,
   "workbench.colorCustomizations": {
+<<<<<<< HEAD
     "titleBar.activeBackground": "#3f708d",
     "titleBar.inactiveBackground": "#3f708d99",
     "activityBar.activeBackground": "#4f8cb0",
@@ -17,4 +18,9 @@
     "titleBar.inactiveForeground": "#e7e7e799"
   },
   "peacock.color": "#3F708D"
+=======
+    "titleBar.activeBackground": "#1390ff",
+    "titleBar.inactiveBackground": "#1390ff",  
+  }
+>>>>>>> 77855722058c54741146c24f3641ff53fc3d11d1
 }
