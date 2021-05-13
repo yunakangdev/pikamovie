@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { IoIosClose } from "react-icons/io";
 import styles from './login.module.css';
@@ -8,7 +8,7 @@ const Login = ({ authService }) => {
   const historyState = history?.location?.state;
   const [userId, setUserId] = useState(historyState && historyState.id);
   const [userName, setUserName] = useState(historyState && historyState.displayName);
-  const [userEmail, setUserEmail] = useState(historyState && historyState.Email);
+  const [userEmail, setUserEmail] = useState(historyState && historyState.email);
   // const [nominees, setNominees] = 
   const [isLoginMenuActive, setIsLoginMenuActive] = useState(false);
   
@@ -24,7 +24,13 @@ const Login = ({ authService }) => {
     authService
       .login(event.currentTarget.textContent)
       .then(data => {
-        // create user info and save it in firebase databse
+        console.log(`logged in!`);
+        console.log(historyState);
+        console.log(data);
+        console.log(data.user.uid);
+        setUserId(data.user.uid);
+        setUserName(data.user.displayName);
+        setUserEmail(data.user.email);
         goToDashboard(data);
         closeLoginMenu(); 
       });
@@ -32,36 +38,33 @@ const Login = ({ authService }) => {
 
   const onLogout = () => {
     authService.logout();
+    setUserId('');
+    setUserName('');
+    setUserEmail('');
+    console.log(historyState);
+    console.log(userId);
+    console.log(userName);
+    console.log(userEmail);
     closeLoginMenu();
-  }
+    history.push('/');
+  };
 
-  // const goToMain = (data) => {
-  //   if (data.user && data.user.uid) {
-  //     history.push({
-  //       pathname: '/',
-  //       state: { id: userId,
-  //         name: data.user.displayName,
-  //         email: data.user.email,
-  //         // nominees: ,
-  //       },
-  //     });
-  //   } else {
-  //     history.push('/');
-  //   }
-  //   closeLoginMenu();
-  // };
-
+  // doens't work => can't receive "data"
   const goToDashboard = (data) => {
+    console.log(`historyState:`);
+    console.log(historyState);
     if (data.user && data.user.uid) {
+      console.log(`goToDashboard fired! && data.user exist`);
       history.push({
         pathname: '/dashboard',
         state: { id: userId,
-                name: data.user.displayName,
-                email: data.user.email,
-                // nominees: ,
-              },
+          name: data.user.displayName,
+          email: data.user.email,
+          // nominees: ,
+        },
       });
     } else {
+      console.log(`goToDashboard fired! && data.user doesn't exist`);
       history.push('/dashboard');
     }
     closeLoginMenu();
@@ -70,11 +73,18 @@ const Login = ({ authService }) => {
   useEffect(() => {
     authService.onAuthChange(user => {
       if (user) {
+        console.log(`useEffect fired!`);
+        console.log(user);
+        console.log(user.uid);
         setUserId(user.uid);
         setUserName(user.displayName);
         setUserEmail(user.email);
         // setNominees();
       } else {
+        // doesn't work
+        setUserId('');
+        setUserName('');
+        setUserEmail('');
         // history.push('/');
       }
     });

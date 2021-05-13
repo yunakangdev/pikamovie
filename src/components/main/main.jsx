@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect, memo, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import Search from '../search/search';
 import MovieList from '../movie_list/movie_list';
@@ -7,7 +7,7 @@ import NomineeList from '../nominee_list/nominee_list';
 import MovieModal from '../movie_modal/movie_modal';
 import styles from './main.module.css';
 
-const Main = memo(({ pikamovie, nomineesRepository }) => {
+const Main = ({ authService, pikamovie, nomineesRepository }) => {
   const history = useHistory();
   const historyState = history?.location?.state;
   const [userId, setUserId] = useState(historyState && historyState.id);
@@ -44,30 +44,26 @@ const Main = memo(({ pikamovie, nomineesRepository }) => {
 
   const handleNominateClick = useCallback((id, isNominated) => {    
     if (isNominated === true) {
-      addNominee(id);
+      createOrUpdateNominee(id);
     }
   }, []);
 
-  const addNominee = (id) => {
+  const createOrUpdateNominee = (id) => {
     pikamovie
       .searchById(id)
-      .then(movie => {
+      .then(nominatedMovie => {
         setNominees(nominees => {
-          if (nominees.some(nominee => nominee.imdbID === movie.imdbID) === false) {
+          if (nominees.some(nominee => nominee.imdbID === nominatedMovie.imdbID) === false) {
             if (!nominees || nominees.length < 5) {
-              const updated = [...nominees, movie];
-              setNominees(updated);
-
-              if (userId) {
-                nomineesRepository.saveNominee(userId, movie.imdbID);
-              }
-              // add the movie to the firebase database
-
+              const updatedNominees = [...nominees, nominatedMovie];
+              setNominees(nominees => updatedNominees);
+              // can't send userId
+              nomineesRepository.saveNominee(userId, nominatedMovie);
             } else {
-              setNominees(nominees);
+              setNominees(nominees => nominees);
             }
           } else {
-            setNominees(nominees);
+            setNominees(nominees => nominees);
           }
         });
       }
@@ -77,10 +73,11 @@ const Main = memo(({ pikamovie, nomineesRepository }) => {
   const deleteNominee = (deletedNominee) => {
     if (nominees.find(nominee => deletedNominee)) {
       setNominees(nominees => {
-        const updated = nominees.filter(nominee => {
+        const updatedNominees = nominees.filter(nominee => {
           return (nominee.imdbID !== deletedNominee.imdbID);
         });
-        setNominees(updated);
+        setNominees(nominees => setNominees(updatedNominees));
+        nomineesRepository.deleteNominee(userId, deletedNominee);
       });
     }
   }
@@ -131,7 +128,6 @@ const Main = memo(({ pikamovie, nomineesRepository }) => {
       }
     </div>
     )
-  }
-);
+  };
 
 export default Main;
