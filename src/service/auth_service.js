@@ -20,11 +20,8 @@ class AuthService {
   getUser() {
     const user = firebase.auth().currentUser;
     if (user) {
-      // User is signed in
       return user;
-    } else {
-      // No user is signed in
-    }
+    } 
   }
 }
 

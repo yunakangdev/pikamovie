@@ -10,68 +10,35 @@ const MovieItem = ({ authService, movie, nominees, onMovieClick, onNominateClick
   const handleNoPoster = (e) => {
     e.target.src=process.env.PUBLIC_URL + "./images/no-poster.png";
   }
-
-  const getNumNominees = () => {
-    if (nominees) {
-      setNumNominees(nominees.length);
-    }
-  }
-
+  
   useEffect(() => {
-    getNumNominees();
+    nominees && setNumNominees(nominees.length);
+    nominees && (nominees.some(nominee => nominee.imdbID === imdbID)) ? setIsNominated(true) : setIsNominated(false);
   }, [nominees]);
 
-  const getUserInfo = () => {
-    const user = authService.getUser();
-    let userInfo;
-    let id, name, email;
-
-    if (user != null) {
-      userInfo = {
-        id: user.uid,
-        name: user.displayName,
-        email: user.email
-      };
-
-      return userInfo;
-    }
-  }
-
-  const getIsNominated = (nomineeId) => {
-    const userInfo = getUserInfo();
-    let answer;
-    // when the user is logged in
-    if (userInfo) {
-      console.log(`user exists`);
-      console.log(`findNominee result: ${nomineesRepository.findNominee(userInfo.id, nomineeId)}`);
-      if (!nomineesRepository.findNominee(userInfo.id, nomineeId) && numNominees < 5) {
-        console.log(`no movie found`);
-        answer = true;
-      }
-    } else if (!userInfo) {
-      console.log(`user doesn't exist`);
-      // when the user is not logged in
-      if (!isNominated && numNominees < 5) {
-        console.log(`no movie found`);
-        answer = true;
-      }
-    }
-    return answer; 
-  }
-
-  const handleNominateClick = (nomineeId) => {
-    // if (!isNominated && numNominees < 5) {
-    // 1. if the movie is not nominated (= not in the nominee list in the server)
-    // 2. if the nominee list has less than 5 movies (no API in firebase for this)
-    if (getIsNominated(nomineeId)) {
+  const getCanBeNominated = (nomineeId) => {
+    const isNomineeFound = Array.from(nominees).some(nominee => nominee.imdbID === nomineeId);
+  
+    if (!isNomineeFound && numNominees < 5) {
       setIsNominated(true);
-      onNominateClick(nomineeId, true);
-    } else {
+      return true;
+    } else if (!isNomineeFound && numNominees >= 5) {
       setIsNominated(false);
-      onNominateClick(nomineeId, false);
+      return false;
+    } else if (isNomineeFound && isNominated) {
+      setIsNominated(false);
+      return false;
     }
   }
   
+  const handleNominateClick = (nomineeId) => {
+    if (getCanBeNominated(nomineeId)) {
+      onNominateClick(nomineeId, true);
+    } else {
+      onNominateClick(nomineeId, false);
+    }
+  }
+
   return (
     <tr>
       <td className={styles.movie} onClick={() => onMovieClick(imdbID)}>

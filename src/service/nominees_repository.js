@@ -9,8 +9,18 @@ class NomineesRepository {
     firebaseApp.database().ref(`${userId}/nominees/${nomineeId}`).remove();
   }
 
+  // getNominee(userId, nomineeId) {
+  //   firebaseApp.database().ref(userId + '/nominees')
+  //     .on('value', snapshot => {
+  //       const nomineeFound = snapshot.val();
+  //       if (nomineeFound) {
+  //         return nomineeFound;
+  //       }
+  //     });
+  // }
+
   findNominee(userId, nomineeId) {
-    firebaseApp.database().ref(`${userId}/nominees`)
+    firebaseApp.database().ref(userId + '/nominees')
       .equalTo(nomineeId)
       .once('value', snapshot => {
         const nomineeFound = snapshot.val();
@@ -21,7 +31,7 @@ class NomineesRepository {
   }
 
   syncNominees(userId, onUpdate) {
-    const ref = firebaseApp.database().ref(`${userId}/nominees`);
+    const ref = firebaseApp.database().ref(userId + 'nominees');
     ref.on('value', snapshot => {
       const nomineesUpdated = snapshot.val();
       nomineesUpdated && onUpdate(nomineesUpdated);

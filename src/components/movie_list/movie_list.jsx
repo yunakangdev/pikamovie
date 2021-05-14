@@ -19,8 +19,8 @@ const MovieList = memo(
         <tbody>
           {
             movies.map(movie => <MovieItem key={movie.imdbID} 
-                                          movie={movie} 
                                           authService={authService}
+                                          movie={movie} 
                                           nominees={nominees}
                                           onMovieClick={onMovieClick}
                                           onNominateClick={onNominateClick}

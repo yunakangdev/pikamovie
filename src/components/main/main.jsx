@@ -13,6 +13,7 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
   const [userId, setUserId] = useState(historyState && historyState.id);
   const [movies, setMovies] = useState([]);
   const [nominees, setNominees] = useState([]);
+  const [numNominees, setNumNominees] = useState(0);
   const [searchResult, setSearchResult] = useState('');
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalActive, setIsModalActive] = useState(false);
@@ -24,15 +25,19 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
         .then(movies => setMovies(movies));
     }
   }, [pikamovie, searchResult]);
-
+  
   useEffect(() => {
-    // if logged in, sync nominees whenever userId / nominees change
-    if (!userId) return;
+    if (!userId) {
+      if (nominees) {
+        setNumNominees(nominees.length);
+        setNominees(prev => setNominees(nominees));
+      }
+    }
+
     const stopSync = nomineesRepository.syncNominees(userId, (userId, nominees) => {
       setUserId(userId);
-      setNominees(nominees);
+      setNominees(prev => setNominees(nominees));
     });
-    // return stopSync() function to stop the sync
     return () => stopSync();
   }, [userId, nominees]);
   
@@ -65,40 +70,49 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
         name: user.displayName,
         email: user.email
       };
-
       return userInfo;
     }
   }
 
   const createOrUpdateNominee = (nomineeId) => {
+    console.log(nominees); // []
+
     pikamovie
       .searchById(nomineeId)
       .then(nominatedMovie => {
         // add nominee locally
         setNominees(nominees => {
-          if (!nominees.some(nominee => nominee.imdbID === nominatedMovie.imdbID)) {
-            if (!nominees || nominees.length < 5) {
+          if (nominees && !(Array.from(nominees).find(nominee => nominee.imdbID === nominatedMovie.imdbID))) {
+            if (nominees.length < 5) {
               const updatedNominees = [...nominees, nominatedMovie];
-              setNominees(updatedNominees);
+              setNominees(prev => setNominees(updatedNominees));
 
               // if logged in, add nominee to database as well
               const userInfo = getUserInfo();
-              if (userInfo.id) {
+              if (userInfo) {
                 nomineesRepository.saveNominee(userInfo.id, nominatedMovie);
               }
-            } else {
-              setNominees(nominees);
-            }
+            } 
           } else {
-            setNominees(nominees);
+            setNominees(nominatedMovie);
+
+            // if logged in, add nominee to database as well
+            const userInfo = getUserInfo();
+            if (userInfo) {
+              nomineesRepository.saveNominee(userInfo.id, nominatedMovie);
+            }
           }
         });
       }
     );
+
+    console.log(nominees); // []
   }
 
   const deleteNominee = (deletedNomineeId) => {
-    if (nominees.find(nominee => nominee.imdbID === deletedNomineeId)) {
+    console.log(nominees); // []
+
+    if (nominees && nominees.find(nominee => nominee.imdbID === deletedNomineeId)) {
       setNominees(nominees => {
         // delete nominee locally
         const updatedNominees = nominees.filter(nominee => {
@@ -108,20 +122,32 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
 
         // if logged in, delete nominee from database as well
         const userInfo = getUserInfo();
-        if (userInfo.id) {
+        if (userInfo) {
           nomineesRepository.deleteNominee(userInfo.id, deletedNomineeId);
         }
       });
     }
+    
+    console.log(nominees); // []
   }
 
-  const handleNominateClick = useCallback((nomineeId, isNominated) => {    
-    if (isNominated) {
-      createOrUpdateNominee(nomineeId);      
-    } else {
-      deleteNominee(nomineeId);
+  const handleNominateClick = (nomineeId, isNominated) => {    
+    const user = authService.getUser();
+    if (user !== null) {
+      if (isNominated) {
+        createOrUpdateNominee(nomineeId);
+      } else {
+        deleteNominee(nomineeId);
+      }
+
+    } else if (user === null) {  
+      if (isNominated) {
+        createOrUpdateNominee(nomineeId);
+      } else {
+        deleteNominee(nomineeId);
+      } 
     }
-  }, []);
+  }
 
   const openModal = useCallback((id) => {
     pikamovie

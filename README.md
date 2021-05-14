@@ -161,9 +161,14 @@ React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux,
       "deploy": "gh-pages -d build",
       "start": "react-scripts start",
       "build": "react-scripts build",
-      }  
+      }
 
 - [ ] can't receive userId  
-      => create getUserInfo function (using firebase API) to get the user information  
+       => create getUserInfo function (using firebase API) to get the user information
 
-    
+- [ ] in syncNominee function, firebase path error occured (invalid string)  
+       => change `${userId}/nominees` to userId + 'nominees'
+
+- [ ] it is hard to update data between components  
+       (send nominees data in Main Component to Dashboard Component)  
+       => use useContext or redux
