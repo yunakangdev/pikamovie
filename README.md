@@ -151,7 +151,7 @@ React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux,
        => npm install --save react-redux-firebase  
        => npm install --save redux-firestore
 
-- [x] the website looks bigger on Netlify  
+- [ ] the website looks bigger on Netlify  
        => deploy on Heroku  
        https://create-react-app.dev/docs/deployment/  
        - "homepage": "https://jeankangdev.github.io/my-app"  
@@ -161,4 +161,9 @@ React Hooks, React Router, React Styled Components, Firebase, Cloudinary, Redux,
       "deploy": "gh-pages -d build",
       "start": "react-scripts start",
       "build": "react-scripts build",
-      }
+      }  
+
+- [ ] can't receive userId  
+      => create getUserInfo function (using firebase API) to get the user information  
+
+    

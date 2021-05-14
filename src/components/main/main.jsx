@@ -25,6 +25,18 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
     }
   }, [pikamovie, searchResult]);
 
+  useEffect(() => {
+    // if logged in, sync nominees whenever userId / nominees change
+    if (!userId) return;
+    const stopSync = nomineesRepository.syncNominees(userId, (userId, nominees) => {
+      setUserId(userId);
+      setNominees(nominees);
+    });
+    // return stopSync() function to stop the sync
+    return () => stopSync();
+  }, [userId, nominees]);
+  
+
   const search = useCallback((title) => {
     if (title) {
       pikamovie
@@ -42,45 +54,74 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
     }
   }, []);
 
-  const handleNominateClick = useCallback((id, isNominated) => {    
-    if (isNominated === true) {
-      createOrUpdateNominee(id);
-    }
-  }, []);
+  const getUserInfo = () => {
+    const user = authService.getUser();
+    let userInfo;
+    let id, name, email;
 
-  const createOrUpdateNominee = (id) => {
+    if (user != null) {
+      userInfo = {
+        id: user.uid,
+        name: user.displayName,
+        email: user.email
+      };
+
+      return userInfo;
+    }
+  }
+
+  const createOrUpdateNominee = (nomineeId) => {
     pikamovie
-      .searchById(id)
+      .searchById(nomineeId)
       .then(nominatedMovie => {
+        // add nominee locally
         setNominees(nominees => {
-          if (nominees.some(nominee => nominee.imdbID === nominatedMovie.imdbID) === false) {
+          if (!nominees.some(nominee => nominee.imdbID === nominatedMovie.imdbID)) {
             if (!nominees || nominees.length < 5) {
               const updatedNominees = [...nominees, nominatedMovie];
-              setNominees(nominees => updatedNominees);
-              // can't send userId
-              nomineesRepository.saveNominee(userId, nominatedMovie);
+              setNominees(updatedNominees);
+
+              // if logged in, add nominee to database as well
+              const userInfo = getUserInfo();
+              if (userInfo.id) {
+                nomineesRepository.saveNominee(userInfo.id, nominatedMovie);
+              }
             } else {
-              setNominees(nominees => nominees);
+              setNominees(nominees);
             }
           } else {
-            setNominees(nominees => nominees);
+            setNominees(nominees);
           }
         });
       }
     );
   }
 
-  const deleteNominee = (deletedNominee) => {
-    if (nominees.find(nominee => deletedNominee)) {
+  const deleteNominee = (deletedNomineeId) => {
+    if (nominees.find(nominee => nominee.imdbID === deletedNomineeId)) {
       setNominees(nominees => {
+        // delete nominee locally
         const updatedNominees = nominees.filter(nominee => {
-          return (nominee.imdbID !== deletedNominee.imdbID);
+          return (nominee.imdbID !== deletedNomineeId);
         });
         setNominees(nominees => setNominees(updatedNominees));
-        nomineesRepository.deleteNominee(userId, deletedNominee);
+
+        // if logged in, delete nominee from database as well
+        const userInfo = getUserInfo();
+        if (userInfo.id) {
+          nomineesRepository.deleteNominee(userInfo.id, deletedNomineeId);
+        }
       });
     }
   }
+
+  const handleNominateClick = useCallback((nomineeId, isNominated) => {    
+    if (isNominated) {
+      createOrUpdateNominee(nomineeId);      
+    } else {
+      deleteNominee(nomineeId);
+    }
+  }, []);
 
   const openModal = useCallback((id) => {
     pikamovie
@@ -112,7 +153,7 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
       {/* Movie & Nomination list */}
       <div className={styles.tables}>
         <div className={styles.left}>
-          <MovieList movies={movies} nominees={nominees} onMovieClick={openModal} onNominateClick={handleNominateClick} />
+          <MovieList authService={authService} movies={movies} nominees={nominees} onMovieClick={openModal} onNominateClick={handleNominateClick} nomineesRepository={nomineesRepository} />
         </div>
         <div className={styles.right}>
           <NomineeList nominees={nominees} onDeleteClick={deleteNominee} />

@@ -3,7 +3,7 @@ import MovieItem from '../movie_item/movie_item';
 import styles from './movie_list.module.css';
 
 const MovieList = memo(
-  ({ movies, nominees, onMovieClick, onNominateClick }) => {
+  ({ authService, movies, nominees, onMovieClick, onNominateClick, nomineesRepository }) => {
     return (
       <table className={styles.movies}>
         <colgroup>
@@ -20,9 +20,11 @@ const MovieList = memo(
           {
             movies.map(movie => <MovieItem key={movie.imdbID} 
                                           movie={movie} 
+                                          authService={authService}
                                           nominees={nominees}
                                           onMovieClick={onMovieClick}
                                           onNominateClick={onNominateClick}
+                                          nomineesRepository={nomineesRepository}
             />)
           }        
         </tbody>
