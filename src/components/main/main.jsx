@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import Search from '../search/search';
@@ -7,7 +7,7 @@ import NomineeList from '../nominee_list/nominee_list';
 import MovieModal from '../movie_modal/movie_modal';
 import styles from './main.module.css';
 
-const Main = ({ authService, pikamovie, nomineesRepository }) => {
+const Main = memo(({ authService, pikamovie, nomineesRepository }) => {
   const history = useHistory();
   const historyState = history?.location?.state;
   const [userId, setUserId] = useState(historyState && historyState.id);
@@ -34,14 +34,13 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
       }
     }
 
-    const stopSync = nomineesRepository.syncNominees(userId, (userId, nominees) => {
-      setUserId(userId);
-      setNominees(prev => setNominees(nominees));
-    });
+  const stopSync = nomineesRepository.syncNominees(userId, (userId, nominees) => {
+    setUserId(userId);
+    setNominees(prev => setNominees(nominees));
+  });
     return () => stopSync();
   }, [userId, nominees, nomineesRepository]);
   
-
   const search = useCallback((title) => {
     if (title) {
       pikamovie
@@ -181,6 +180,6 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
       }
     </div>
     )
-  };
+  });
 
 export default Main;

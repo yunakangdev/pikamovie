@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import styles from './movie_item.module.css';
 
-const MovieItem = ({ authService, movie, nominees, onMovieClick, onNominateClick, nomineesRepository }) => {
+const MovieItem = memo(({ authService, movie, nominees, onMovieClick, onNominateClick, nomineesRepository }) => {
   const { imdbID, Poster, Title, Year} = movie;
   const [isNominated, setIsNominated] = useState(false);
   const [numNominees, setNumNominees] = useState(0);
@@ -57,6 +57,6 @@ const MovieItem = ({ authService, movie, nominees, onMovieClick, onNominateClick
       </td>
     </tr>
   );
-};
+});
 
 export default MovieItem;

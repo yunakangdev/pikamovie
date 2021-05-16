@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { IoIosClose } from "react-icons/io";
 import styles from './login.module.css';
 
-const Login = ({ authService }) => {
+const Login = memo(({ authService }) => {
   const history = useHistory();
   const historyState = history?.location?.state;
   const [userId, setUserId] = useState(historyState && historyState.id);
   const [userName, setUserName] = useState(historyState && historyState.displayName);
   const [userEmail, setUserEmail] = useState(historyState && historyState.email);
-  // const [nominees, setNominees] 
   const [isLoginMenuActive, setIsLoginMenuActive] = useState(false);
   
   const openLoginMenu = () => {
@@ -32,14 +31,14 @@ const Login = ({ authService }) => {
       });
   }
 
-  const onLogout = () => {
+  const onLogout = useCallback(() => {
     authService.logout();
     setUserId('');
     setUserName('');
     setUserEmail('');
     closeLoginMenu();
     history.push('/');
-  };
+  });
 
   const goToDashboard = (data) => {
     if (data.user && data.user.uid) {
@@ -69,7 +68,7 @@ const Login = ({ authService }) => {
         setUserEmail('');
       }
     });
-  });
+  }, [authService, userId, userName, userEmail, history]);
   
   return (
     <section className={styles.login}>
@@ -92,6 +91,6 @@ const Login = ({ authService }) => {
       }
     </section>
   )
-};
+});
 
 export default Login;

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './dashboard.module.css';
 
-const Dashboard = ({ authService }) => {
+const Dashboard = memo(({ authService }) => {
   const history = useHistory();
   const historyState = history?.location?.state;
   const [userId, setUserId] = useState(historyState && historyState.id);
@@ -18,7 +18,7 @@ const Dashboard = ({ authService }) => {
         setUserEmail(user.email);
       }
     })
-  }); 
+  }, [authService]); 
 
   return (
     <div className={styles.dashboard}>
@@ -39,6 +39,6 @@ const Dashboard = ({ authService }) => {
       </div>
     </div>
   )
-};
+});
 
 export default Dashboard;

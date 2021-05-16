@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { IoIosClose } from "react-icons/io";
 import styles from './nominee_item.module.css';
 
-const NomineeItem = ({ nominee, onDeleteClick }) => {
+const NomineeItem = memo(({ nominee, onDeleteClick }) => {
   const { imdbID, Title, Year } = nominee;
 
   return (
@@ -18,6 +18,6 @@ const NomineeItem = ({ nominee, onDeleteClick }) => {
     }
     </>
   )
-};
+});
 
 export default NomineeItem;
