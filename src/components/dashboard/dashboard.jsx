@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-// import NomineeList from '../nominee_list/nominee_list';
 import styles from './dashboard.module.css';
 
 const Dashboard = ({ authService }) => {
@@ -21,31 +20,6 @@ const Dashboard = ({ authService }) => {
     })
   }); 
 
-  // const getUserInfo = () => {
-  //   console.log(`get user info`);
-
-  //   const user = authService.getUser();
-  //   let uid, name, email;
-
-  //   if (user != null) {
-  //     uid = user.uid;
-  //     name = user.displayName;
-  //     email = user.email;
-
-  //     // causes too many re-renders
-  //     // setUserId(uid);
-  //     // setUserName(name);
-  //     // setUserEmail(email);
-      
-  //     console.log(uid);
-  //     console.log(name);
-  //     console.log(email);
-  //   }
-  // }
-
-  // make a function that display a user's info + nominee list
-  // authService.getUser();
-
   return (
     <div className={styles.dashboard}>
       <div className={styles.account}>
@@ -58,13 +32,6 @@ const Dashboard = ({ authService }) => {
       </div>
       <div className={styles.nomination}>
         <h3 className={styles.title}>Nomination</h3>
-
-        {/* Nomination */}
-        {/* <NomineeList /> */}
-        {/* {
-          nominees &&
-          
-        } */}
         {
           !nominees &&
           <> You haven't nominated any movies yet. </>

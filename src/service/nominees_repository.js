@@ -1,26 +1,16 @@
-import firebaseApp from './firebase';
+import { firebaseDatabase } from './firebase';
 
 class NomineesRepository {
   saveNominee(userId, nominee) {
-    firebaseApp.database().ref(`${userId}/nominees/${nominee.imdbID}`).set(nominee);
+    firebaseDatabase.ref(`${userId}/nominees/${nominee.imdbID}`).set(nominee);
   }
 
   deleteNominee(userId, nomineeId) {
-    firebaseApp.database().ref(`${userId}/nominees/${nomineeId}`).remove();
+    firebaseDatabase.ref(`${userId}/nominees/${nomineeId}`).remove();
   }
 
-  // getNominee(userId, nomineeId) {
-  //   firebaseApp.database().ref(userId + '/nominees')
-  //     .on('value', snapshot => {
-  //       const nomineeFound = snapshot.val();
-  //       if (nomineeFound) {
-  //         return nomineeFound;
-  //       }
-  //     });
-  // }
-
   findNominee(userId, nomineeId) {
-    firebaseApp.database().ref(userId + '/nominees')
+    firebaseDatabase.ref(userId + '/nominees')
       .equalTo(nomineeId)
       .once('value', snapshot => {
         const nomineeFound = snapshot.val();
@@ -31,7 +21,7 @@ class NomineesRepository {
   }
 
   syncNominees(userId, onUpdate) {
-    const ref = firebaseApp.database().ref(userId + 'nominees');
+    const ref = firebaseDatabase.ref(userId + 'nominees');
     ref.on('value', snapshot => {
       const nomineesUpdated = snapshot.val();
       nomineesUpdated && onUpdate(nomineesUpdated);

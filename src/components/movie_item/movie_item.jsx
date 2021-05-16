@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import styles from './movie_item.module.css';
 
@@ -14,7 +14,7 @@ const MovieItem = ({ authService, movie, nominees, onMovieClick, onNominateClick
   useEffect(() => {
     nominees && setNumNominees(nominees.length);
     nominees && (nominees.some(nominee => nominee.imdbID === imdbID)) ? setIsNominated(true) : setIsNominated(false);
-  }, [nominees]);
+  }, [nominees, imdbID]);
 
   const getCanBeNominated = (nomineeId) => {
     const isNomineeFound = Array.from(nominees).some(nominee => nominee.imdbID === nomineeId);

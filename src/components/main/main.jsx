@@ -39,7 +39,7 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
       setNominees(prev => setNominees(nominees));
     });
     return () => stopSync();
-  }, [userId, nominees]);
+  }, [userId, nominees, nomineesRepository]);
   
 
   const search = useCallback((title) => {
@@ -57,12 +57,11 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
     } else {
       setSearchResult('');
     }
-  }, []);
+  }, [pikamovie]);
 
   const getUserInfo = () => {
     const user = authService.getUser();
     let userInfo;
-    let id, name, email;
 
     if (user != null) {
       userInfo = {
@@ -75,19 +74,15 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
   }
 
   const createOrUpdateNominee = (nomineeId) => {
-    console.log(nominees); // []
-
     pikamovie
       .searchById(nomineeId)
       .then(nominatedMovie => {
-        // add nominee locally
         setNominees(nominees => {
           if (nominees && !(Array.from(nominees).find(nominee => nominee.imdbID === nominatedMovie.imdbID))) {
             if (nominees.length < 5) {
               const updatedNominees = [...nominees, nominatedMovie];
               setNominees(prev => setNominees(updatedNominees));
 
-              // if logged in, add nominee to database as well
               const userInfo = getUserInfo();
               if (userInfo) {
                 nomineesRepository.saveNominee(userInfo.id, nominatedMovie);
@@ -96,7 +91,6 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
           } else {
             setNominees(nominatedMovie);
 
-            // if logged in, add nominee to database as well
             const userInfo = getUserInfo();
             if (userInfo) {
               nomineesRepository.saveNominee(userInfo.id, nominatedMovie);
@@ -105,30 +99,22 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
         });
       }
     );
-
-    console.log(nominees); // []
   }
 
   const deleteNominee = (deletedNomineeId) => {
-    console.log(nominees); // []
-
     if (nominees && nominees.find(nominee => nominee.imdbID === deletedNomineeId)) {
       setNominees(nominees => {
-        // delete nominee locally
         const updatedNominees = nominees.filter(nominee => {
           return (nominee.imdbID !== deletedNomineeId);
         });
         setNominees(nominees => setNominees(updatedNominees));
 
-        // if logged in, delete nominee from database as well
         const userInfo = getUserInfo();
         if (userInfo) {
           nomineesRepository.deleteNominee(userInfo.id, deletedNomineeId);
         }
       });
     }
-    
-    console.log(nominees); // []
   }
 
   const handleNominateClick = (nomineeId, isNominated) => {    
@@ -154,7 +140,7 @@ const Main = ({ authService, pikamovie, nomineesRepository }) => {
       .searchById(id)
       .then(movie => setSelectedMovie(movie));
     setIsModalActive(true);
-  }, []);
+  }, [pikamovie]);
 
   const closeModal = () => {
     setIsModalActive(false);
